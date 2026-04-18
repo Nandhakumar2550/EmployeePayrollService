@@ -11,10 +11,10 @@ public class EmployeePayrollService {
         System.out.print("Enter Id: ");
         int id = scan.nextInt();
 
-        System.out.print("Enter Name: ");
+        System.out.print("Enter the Name: ");
         String name = scan.next();
 
-        System.out.print("Enter Salary: ");
+        System.out.print("Enter the Salary: ");
         double salary = scan.nextDouble();
 
         list.add(new EmployeePayrollData(id, name, salary));
