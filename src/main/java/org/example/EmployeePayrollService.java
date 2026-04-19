@@ -1,6 +1,8 @@
 package org.example;
 
 import java.util.*;
+import java.nio.file.*;
+import java.io.IOException;
 
 public class EmployeePayrollService {
 
@@ -18,21 +20,33 @@ public class EmployeePayrollService {
         System.out.print("Enter Salary: ");
         double salary = sc.nextDouble();
 
-        list.add(new EmployeePayrollData(id, name, salary));
+        list.add(new EmployeePayrollData(id, name, salary)); // add employee
     }
 
     // UC1 → Write to console
     public void writeEmployeeData() {
 
-        System.out.println("\nEmployee Payroll Data :");
+        System.out.println("\nEmployee Payroll Data :"); // consistent message
 
         for (EmployeePayrollData e : list) {
-            System.out.println(e);
+            System.out.println(e); // print each employee
         }
     }
 
-    // UC3 → New Method
+    // UC3 → Count entries
     public int countEntries() {
-        return list.size();
+        return list.size(); // return number of employees
+    }
+
+    // UC4 → Write to file
+    public void writeToFile() throws IOException {
+
+        List<String> lines = new ArrayList<>(); // create list of strings
+
+        for (EmployeePayrollData e : list) {
+            lines.add(e.toString()); // convert each employee to string
+        }
+
+        Files.write(Paths.get("payroll.txt"), lines); // write to file
     }
 }

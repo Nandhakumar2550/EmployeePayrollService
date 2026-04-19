@@ -12,6 +12,8 @@ public class EmployeePayrollMain {
         service.readEmployeeData(sc);
         service.writeEmployeeData();
 
+        System.out.println("Total Employees: " + service.countEntries());
+
         sc.close();
 
     }
