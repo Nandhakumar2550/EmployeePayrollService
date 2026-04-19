@@ -1,0 +1,2 @@
+Id = 1, Name = Nandha, Salary = 50000.0
+Id = 2, Name = Kumar, Salary = 60000.0

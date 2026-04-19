@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.nio.file.*;
+import java.io.IOException;
 
 public class EmployeePayrollFileTest {
 
@@ -12,19 +13,21 @@ public class EmployeePayrollFileTest {
 
         EmployeePayrollService service = new EmployeePayrollService();
 
+        // adding employee data
         service.list.add(new EmployeePayrollData(1, "Nandha", 50000));
         service.list.add(new EmployeePayrollData(2, "Kumar", 60000));
 
+        // write to file
         service.writeToFile();
 
-        Path file = Paths.get("payroll.txt");
+        Path path = Paths.get("payroll.txt"); // file path
 
-        // file exists check
-        assertTrue(Files.exists(file));
+        // check file exists
+        assertTrue(Files.exists(path));
 
-        // file line count check
-        long lines = Files.lines(file).count();
+        // check number of lines
+        long count = Files.lines(path).count();
 
-        assertEquals(2, lines);
+        assertEquals(2, count); // verify count
     }
 }

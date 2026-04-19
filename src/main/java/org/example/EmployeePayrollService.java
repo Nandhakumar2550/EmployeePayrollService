@@ -3,6 +3,7 @@ package org.example;
 import java.util.*;
 import java.nio.file.*;
 import java.io.IOException;
+import java.util.stream.Stream;
 
 public class EmployeePayrollService {
 
@@ -26,7 +27,7 @@ public class EmployeePayrollService {
     // UC1 → Write to console
     public void writeEmployeeData() {
 
-        System.out.println("\nEmployee Payroll Data :"); // consistent message
+        System.out.println("\nEmployee Payroll Data :");
 
         for (EmployeePayrollData e : list) {
             System.out.println(e); // print each employee
@@ -35,18 +36,36 @@ public class EmployeePayrollService {
 
     // UC3 → Count entries
     public int countEntries() {
-        return list.size(); // return number of employees
+        return list.size();
     }
 
     // UC4 → Write to file
     public void writeToFile() throws IOException {
 
-        List<String> lines = new ArrayList<>(); // create list of strings
+        List<String> lines = new ArrayList<>();
 
         for (EmployeePayrollData e : list) {
-            lines.add(e.toString()); // convert each employee to string
+            lines.add(e.toString());
         }
 
-        Files.write(Paths.get("payroll.txt"), lines); // write to file
+        Files.write(Paths.get("payroll.txt"), lines);
+    }
+
+    // UC5 → Print file data
+    public void printFromFile() throws IOException {
+
+        System.out.println("\nData from File:");
+
+        try (Stream<String> lines = Files.lines(Paths.get("payroll.txt"))) {
+            lines.forEach(System.out::println);
+        }
+    }
+
+    // UC5 → Count file entries
+    public long countEntriesInFile() throws IOException {
+
+        try (Stream<String> lines = Files.lines(Paths.get("payroll.txt"))) {
+            return lines.count();
+        }
     }
 }
