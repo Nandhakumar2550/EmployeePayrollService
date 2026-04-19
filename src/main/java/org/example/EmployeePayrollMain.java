@@ -10,18 +10,8 @@ public class EmployeePayrollMain {
 
         EmployeePayrollService service = new EmployeePayrollService();
 
-        System.out.print("Enter Id: ");
-        int id = scan.nextInt();
-
-        System.out.print("Enter Name: ");
-        String name = scan.next();
-
-        System.out.print("Enter Salary: ");
-        double salary = scan.nextDouble();
-
-        service.addEmployee(id, name, salary);
-
-        service.printData();
+        service.readEmployeeData(scan);
+        service.writeEmployeeData();
 
         System.out.println("Total Employees: " + service.countEntries());
 

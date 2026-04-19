@@ -3,8 +3,8 @@ package org.example;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.IOException;
 import java.nio.file.*;
+import java.io.IOException;
 
 public class EmployeePayrollFileTest {
 
@@ -13,15 +13,21 @@ public class EmployeePayrollFileTest {
 
         EmployeePayrollService service = new EmployeePayrollService();
 
-        service.addEmployee(1, "Nandha", 50000);
-        service.addEmployee(2, "Kumar", 60000);
+        // ✅ correct way (NO addEmployee)
+        service.list.add(new EmployeePayrollData(1, "Nandha", 50000));
+        service.list.add(new EmployeePayrollData(2, "Kumar", 60000));
 
-        String fileName = "employees.txt";
+        // ✅ correct method (NO parameter)
+        service.writeToFile();
 
-        service.writeToFile(fileName);
+        Path path = Paths.get("payroll.txt");
 
-        Path path = Paths.get(fileName);
-
+        // check file exists
         assertTrue(Files.exists(path));
+
+        // check number of lines
+        long count = Files.lines(path).count();
+
+        assertEquals(2, count);
     }
 }

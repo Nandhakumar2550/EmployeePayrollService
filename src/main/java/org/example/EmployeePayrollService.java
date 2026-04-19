@@ -1,29 +1,42 @@
 package org.example;
 
-import java.io.IOException;
-import java.nio.file.*;
 import java.util.*;
+import java.nio.file.*;
+import java.io.IOException;
+import java.util.stream.Stream;
 
 public class EmployeePayrollService {
 
     List<EmployeePayrollData> list = new ArrayList<>();
 
-    public void addEmployee(int id, String name, double salary) {
+    public void readEmployeeData(Scanner sc) {
+
+        System.out.print("Enter Id: ");
+        int id = sc.nextInt();
+
+        System.out.print("Enter Name: ");
+        String name = sc.next();
+
+        System.out.print("Enter Salary: ");
+        double salary = sc.nextDouble();
+
         list.add(new EmployeePayrollData(id, name, salary));
+    }
+
+    public void writeEmployeeData() {
+
+        System.out.println("\nEmployee Data:");
+
+        for (EmployeePayrollData e : list) {
+            System.out.println(e);
+        }
     }
 
     public int countEntries() {
         return list.size();
     }
 
-    public void printData() {
-        for (EmployeePayrollData data : list) {
-            System.out.println(data);
-        }
-    }
-
-    // UC4 → write to file
-    public void writeToFile(String fileName) throws IOException {
+    public void writeToFile() throws IOException {
 
         List<String> lines = new ArrayList<>();
 
@@ -31,12 +44,24 @@ public class EmployeePayrollService {
             lines.add(e.toString());
         }
 
-        Files.write(Paths.get(fileName), lines);
+        Files.write(Paths.get("payroll.txt"), lines);
     }
-    public List<String> readFromFile(String fileName) throws IOException {
 
-        Path path = Paths.get(fileName);
+    // 🔥 UC5 NEW METHOD → print file data
+    public void printFromFile() throws IOException {
 
-        return Files.readAllLines(path);
+        System.out.println("\nData from File:");
+
+        try (Stream<String> lines = Files.lines(Paths.get("payroll.txt"))) {
+            lines.forEach(System.out::println);
+        }
+    }
+
+    // 🔥 UC5 NEW METHOD → count file entries
+    public long countEntriesInFile() throws IOException {
+
+        try (Stream<String> lines = Files.lines(Paths.get("payroll.txt"))) {
+            return lines.count();
+        }
     }
 }

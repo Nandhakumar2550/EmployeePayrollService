@@ -10,8 +10,9 @@ public class EmployeePayrollTest {
 
         EmployeePayrollService service = new EmployeePayrollService();
 
-        service.addEmployee(1, "Nandha", 50000);
-        service.addEmployee(2, "Kumar", 60000);
+        // correct way
+        service.list.add(new EmployeePayrollData(1, "Nandha", 50000));
+        service.list.add(new EmployeePayrollData(2, "Kumar", 60000));
 
         int count = service.countEntries();
 
