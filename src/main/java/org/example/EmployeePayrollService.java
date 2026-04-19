@@ -1,5 +1,7 @@
 package org.example;
 
+import java.io.IOException;
+import java.nio.file.*;
 import java.util.*;
 
 public class EmployeePayrollService {
@@ -10,7 +12,6 @@ public class EmployeePayrollService {
         list.add(new EmployeePayrollData(id, name, salary));
     }
 
-    // UC3 → count entries
     public int countEntries() {
         return list.size();
     }
@@ -19,5 +20,17 @@ public class EmployeePayrollService {
         for (EmployeePayrollData data : list) {
             System.out.println(data);
         }
+    }
+
+    // UC4 → write to file
+    public void writeToFile(String fileName) throws IOException {
+
+        List<String> lines = new ArrayList<>();
+
+        for (EmployeePayrollData e : list) {
+            lines.add(e.toString());
+        }
+
+        Files.write(Paths.get(fileName), lines);
     }
 }
