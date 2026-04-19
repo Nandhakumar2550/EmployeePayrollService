@@ -33,4 +33,10 @@ public class EmployeePayrollService {
 
         Files.write(Paths.get(fileName), lines);
     }
+    public List<String> readFromFile(String fileName) throws IOException {
+
+        Path path = Paths.get(fileName);
+
+        return Files.readAllLines(path);
+    }
 }
