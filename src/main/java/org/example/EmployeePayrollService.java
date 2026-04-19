@@ -24,7 +24,8 @@ public class EmployeePayrollService {
     // UC1 → Write to console
     public void writeEmployeeData() {
 
-        System.out.println("\nEmployee Data:");
+        System.out.println("\nEmployee Payroll Data in:");
+
 
         for (EmployeePayrollData e : list) {
             System.out.println(e);
