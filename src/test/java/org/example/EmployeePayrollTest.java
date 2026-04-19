@@ -6,15 +6,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EmployeePayrollTest {
 
     @Test
-    void givenEmployees_whenAdded_shouldMatchCount() {
+    void givenEmployee_whenAdded_shouldMatchCount() {
 
         EmployeePayrollService service = new EmployeePayrollService();
 
-        service.addEmployee(1, "Nandha", 50000);
-        service.addEmployee(2, "Kumar", 60000);
+        service.list.add(new EmployeePayrollData(1, "Nandha", 50000));
 
-        int count = service.countEntries();
-
-        assertEquals(2, count);
+        assertEquals(1, service.list.size());
     }
 }

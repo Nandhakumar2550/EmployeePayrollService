@@ -1,42 +1,33 @@
 package org.example;
 
-import java.io.IOException;
-import java.nio.file.*;
 import java.util.*;
 
 public class EmployeePayrollService {
 
     List<EmployeePayrollData> list = new ArrayList<>();
 
-    public void addEmployee(int id, String name, double salary) {
+    // UC1 → Read from console
+    public void readEmployeeData(Scanner sc) {
+
+        System.out.print("Enter Id: ");
+        int id = sc.nextInt();
+
+        System.out.print("Enter Name: ");
+        String name = sc.next();
+
+        System.out.print("Enter Salary: ");
+        double salary = sc.nextDouble();
+
         list.add(new EmployeePayrollData(id, name, salary));
     }
 
-    public int countEntries() {
-        return list.size();
-    }
+    // UC1 → Write to console
+    public void writeEmployeeData() {
 
-    public void printData() {
-        for (EmployeePayrollData data : list) {
-            System.out.println(data);
-        }
-    }
-
-    // UC4 → write to file
-    public void writeToFile(String fileName) throws IOException {
-
-        List<String> lines = new ArrayList<>();
+        System.out.println("\nEmployee Data:");
 
         for (EmployeePayrollData e : list) {
-            lines.add(e.toString());
+            System.out.println(e);
         }
-
-        Files.write(Paths.get(fileName), lines);
-    }
-    public List<String> readFromFile(String fileName) throws IOException {
-
-        Path path = Paths.get(fileName);
-
-        return Files.readAllLines(path);
     }
 }
