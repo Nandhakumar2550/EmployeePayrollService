@@ -3,25 +3,28 @@ package org.example;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.IOException;
 import java.nio.file.*;
 
 public class EmployeePayrollFileTest {
 
     @Test
-    void givenEmployees_whenWrittenToFile_shouldCreateFile() throws IOException {
+    void givenEmployees_whenWrittenToFile_shouldCreateFile() throws Exception {
 
         EmployeePayrollService service = new EmployeePayrollService();
 
-        service.addEmployee(1, "Nandha", 50000);
-        service.addEmployee(2, "Kumar", 60000);
+        service.list.add(new EmployeePayrollData(1, "Nandha", 50000));
+        service.list.add(new EmployeePayrollData(2, "Kumar", 60000));
 
-        String fileName = "employees.txt";
+        service.writeToFile();
 
-        service.writeToFile(fileName);
+        Path file = Paths.get("payroll.txt");
 
-        Path path = Paths.get(fileName);
+        // file exists check
+        assertTrue(Files.exists(file));
 
-        assertTrue(Files.exists(path));
+        // file line count check
+        long lines = Files.lines(file).count();
+
+        assertEquals(2, lines);
     }
 }
