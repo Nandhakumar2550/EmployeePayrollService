@@ -6,24 +6,16 @@ public class EmployeePayrollService {
 
     List<EmployeePayrollData> list = new ArrayList<>();
 
-    public void readEmployeeData(Scanner scan) {
-
-        System.out.print("Enter Id: ");
-        int id = scan.nextInt();
-
-        System.out.print("Enter the Name: ");
-        String name = scan.next();
-
-        System.out.print("Enter the Salary: ");
-        double salary = scan.nextDouble();
-
+    public void addEmployee(int id, String name, double salary) {
         list.add(new EmployeePayrollData(id, name, salary));
     }
 
-    public void writeEmployeeData() {
+    // UC3 → count entries
+    public int countEntries() {
+        return list.size();
+    }
 
-        System.out.println("\nEmployee Payroll Data:");
-
+    public void printData() {
         for (EmployeePayrollData data : list) {
             System.out.println(data);
         }
