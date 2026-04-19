@@ -9,19 +9,10 @@ public class EmployeePayrollMain {
         Scanner sc = new Scanner(System.in);
 
         EmployeePayrollService service = new EmployeePayrollService();
-
-<<<<<<< HEAD
         service.readEmployeeData(sc);
         service.writeEmployeeData();
 
         sc.close();
-=======
-        service.readEmployeeData(scan);
-        service.writeEmployeeData();
 
-        System.out.println("Total Employees: " + service.countEntries());
-
-        scan.close();
->>>>>>> feature/UC3-WatchService
     }
 }
