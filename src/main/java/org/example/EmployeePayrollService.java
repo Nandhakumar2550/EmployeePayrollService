@@ -9,7 +9,6 @@ public class EmployeePayrollService {
 
     List<EmployeePayrollData> list = new ArrayList<>();
 
-    // UC1 → Read from console
     public void readEmployeeData(Scanner sc) {
 
         System.out.print("Enter Id: ");
@@ -21,25 +20,22 @@ public class EmployeePayrollService {
         System.out.print("Enter Salary: ");
         double salary = sc.nextDouble();
 
-        list.add(new EmployeePayrollData(id, name, salary)); // add employee
+        list.add(new EmployeePayrollData(id, name, salary));
     }
 
-    // UC1 → Write to console
     public void writeEmployeeData() {
 
-        System.out.println("\nEmployee Payroll Data :");
+        System.out.println("\nEmployee Data:");
 
         for (EmployeePayrollData e : list) {
-            System.out.println(e); // print each employee
+            System.out.println(e);
         }
     }
 
-    // UC3 → Count entries
     public int countEntries() {
         return list.size();
     }
 
-    // UC4 → Write to file
     public void writeToFile() throws IOException {
 
         List<String> lines = new ArrayList<>();
@@ -51,7 +47,6 @@ public class EmployeePayrollService {
         Files.write(Paths.get("payroll.txt"), lines);
     }
 
-    // UC5 → Print file data
     public void printFromFile() throws IOException {
 
         System.out.println("\nData from File:");
@@ -61,11 +56,16 @@ public class EmployeePayrollService {
         }
     }
 
-    // UC5 → Count file entries
     public long countEntriesInFile() throws IOException {
 
         try (Stream<String> lines = Files.lines(Paths.get("payroll.txt"))) {
             return lines.count();
         }
+    }
+
+    // 🔥 UC6 NEW METHOD → read file for analysis
+    public List<String> readFile() throws IOException {
+
+        return Files.readAllLines(Paths.get("payroll.txt"));
     }
 }
